@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ru.kafpin.lb4.PanelController">
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
+    <children>
+        <HBox spacing="5.0">
+            <children>
+                <ComboBox fx:id="diskOps" onAction="#onSelectDisk"/>
+                <TextField fx:id="pathField" editable="false" HBox.hgrow="ALWAYS"/>
+                <Button mnemonicParsing="false" onAction="#onPassUp" text="Вверх"/>
+            </children>
+        </HBox>
+
+        <TableView fx:id="filesTable" onMouseClicked="#onTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="typeColumn" maxWidth="47.0" prefWidth="47.0" text="Тип"/>
+                <TableColumn fx:id="filenameColumn" prefWidth="381.0" text="Имя файла"/>
+                <TableColumn fx:id="filesizeColumn" maxWidth="90.0" prefWidth="90.0" text="Размер"/>
+                <TableColumn fx:id="filedateColumn" prefWidth="130.0" text="Время"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</VBox>
