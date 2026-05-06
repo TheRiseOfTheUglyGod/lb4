@@ -17,20 +17,13 @@ import java.util.stream.Collectors;
 
 public class PanelController {
 
-    @FXML
-    private ComboBox<String> diskOps;
-    @FXML
-    private TableColumn<FileInfo, String> filedateColumn;
-    @FXML
-    private TableColumn<FileInfo, String> filenameColumn;
-    @FXML
-    private TableView<FileInfo> filesTable;
-    @FXML
-    private TableColumn<FileInfo, Long> filesizeColumn;
-    @FXML
-    private TextField pathField;
-    @FXML
-    private TableColumn<FileInfo, String> typeColumn;
+    @FXML private ComboBox<String> diskOps;
+    @FXML private TableColumn<FileInfo, String> filedateColumn;
+    @FXML private TableColumn<FileInfo, String> filenameColumn;
+    @FXML private TableView<FileInfo> filesTable;
+    @FXML private TableColumn<FileInfo, Long> filesizeColumn;
+    @FXML private TextField pathField;
+    @FXML private TableColumn<FileInfo, String> typeColumn;
 
     @FXML
     void initialize() {
@@ -119,7 +112,7 @@ public class PanelController {
         }
     }
 
-    public String selectedFileName() {
+    public String getSelectedFilename() {
         if (!filesTable.isFocused()) {
             return null;
         }
@@ -127,7 +120,7 @@ public class PanelController {
         return selected != null ? selected.getFileName() : null;
     }
 
-    public String getPath() {
+    public String getCurrentPath() {
         return pathField.getText();
     }
 }

@@ -30,19 +30,17 @@ public class MainController {
 
     @FXML
     void onDelete(ActionEvent event) {
-        if (leftPanelController.selectedFileName() == null && rightPanelController.selectedFileName() == null) {
+        if (leftPanelController.getSelectedFilename() == null &&
+                rightPanelController.getSelectedFilename() == null) {
             showError("Не выбран файл для удаления");
             return;
         }
-
-        PanelController src = (leftPanelController.selectedFileName() != null)
+        PanelController src = (leftPanelController.getSelectedFilename() != null)
                 ? leftPanelController : rightPanelController;
-
-        Path srcPath = Paths.get(src.getPath(), src.selectedFileName());
-
+        Path srcPath = Paths.get(src.getCurrentPath(), src.getSelectedFilename());
         try {
             Files.delete(srcPath);
-            src.updateList(Paths.get(src.getPath()));
+            src.updateList(Paths.get(src.getCurrentPath()));
         } catch (IOException e) {
             showError("Ошибка удаления файла: " + e.getMessage());
         }
@@ -54,31 +52,29 @@ public class MainController {
     }
 
     private void performCopyMove(boolean move) {
-        if (leftPanelController.selectedFileName() == null && rightPanelController.selectedFileName() == null) {
+        if (leftPanelController.getSelectedFilename() == null &&
+                rightPanelController.getSelectedFilename() == null) {
             showError("Не выбран файл для " + (move ? "перемещения" : "копирования"));
             return;
         }
-
         PanelController src, dst;
-        if (leftPanelController.selectedFileName() != null) {
+        if (leftPanelController.getSelectedFilename() != null) {
             src = leftPanelController;
             dst = rightPanelController;
         } else {
             src = rightPanelController;
             dst = leftPanelController;
         }
-
-        Path srcPath = Paths.get(src.getPath(), src.selectedFileName());
-        Path dstPath = Paths.get(dst.getPath()).resolve(srcPath.getFileName());
-
+        Path srcPath = Paths.get(src.getCurrentPath(), src.getSelectedFilename());
+        Path dstPath = Paths.get(dst.getCurrentPath()).resolve(srcPath.getFileName());
         try {
             if (move) {
                 Files.move(srcPath, dstPath, StandardCopyOption.REPLACE_EXISTING);
             } else {
                 Files.copy(srcPath, dstPath, StandardCopyOption.REPLACE_EXISTING);
             }
-            dst.updateList(Paths.get(dst.getPath()));
-            src.updateList(Paths.get(src.getPath()));
+            dst.updateList(Paths.get(dst.getCurrentPath()));
+            src.updateList(Paths.get(src.getCurrentPath()));
         } catch (IOException e) {
             showError("Ошибка " + (move ? "перемещения" : "копирования") + " файла: " + e.getMessage());
         }

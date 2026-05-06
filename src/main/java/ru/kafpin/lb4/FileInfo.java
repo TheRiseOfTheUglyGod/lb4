@@ -20,6 +20,7 @@ public class FileInfo {
             if (this.type == FileType.DIRECTORY) {
                 this.size = -1L;
             }
+
             this.lastModified = LocalDateTime.ofInstant(
                     Files.getLastModifiedTime(path).toInstant(),
                     ZoneOffset.ofHours(3)
@@ -29,35 +30,15 @@ public class FileInfo {
         }
     }
 
-    public String getFileName() {
-        return fileName;
-    }
+    public String getFileName() { return fileName; }
+    public void setFileName(String fileName) { this.fileName = fileName; }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
+    public FileType getType() { return type; }
+    public void setType(FileType type) { this.type = type; }
 
-    public FileType getType() {
-        return type;
-    }
+    public long getSize() { return size; }
+    public void setSize(long size) { this.size = size; }
 
-    public void setType(FileType type) {
-        this.type = type;
-    }
-
-    public long getSize() {
-        return size;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
-    }
-
-    public LocalDateTime getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(LocalDateTime lastModified) {
-        this.lastModified = lastModified;
-    }
+    public LocalDateTime getLastModified() { return lastModified; }
+    public void setLastModified(LocalDateTime lastModified) { this.lastModified = lastModified; }
 }
